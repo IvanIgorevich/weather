@@ -3,7 +3,7 @@ class WeatherSamarasController < ApplicationController
 
   # GET /weather_samaras
   def index
-    @weather_samaras = WeatherSamara.all
+    @weather_samaras = WeatherSamara.call
 
     render json: @weather_samaras
   end
