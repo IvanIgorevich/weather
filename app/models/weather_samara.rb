@@ -28,5 +28,13 @@ class WeatherSamara < ApplicationRecord
     @historical.map { |el| el[:temp]["Metric"]["Value"] }.min
   end
 
+  def self.current
+    @historical[0]
+  end
+
+  def self.historical_avg
+    (@historical.map { |el| el[:temp]["Metric"]["Value"] }.reduce(:+).to_f / @historical.size).round(1)
+  end
+
 
 end
