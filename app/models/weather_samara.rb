@@ -1,0 +1,2 @@
+class WeatherSamara < ApplicationRecord
+end
