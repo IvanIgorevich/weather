@@ -6,7 +6,15 @@ class WeatherSamarasController < ApplicationController
     render json: WeatherSamara.historical
   end
 
-  # GET /weather/current
+  def historical_max
+    render json: WeatherSamara.historical_max
+  end
+
+  def historical_min
+    render json: WeatherSamara.historical_min
+  end
+
+  # GET /weather_samaras/1
   def show
     render json: @weather_samara
   end

@@ -8,18 +8,25 @@ class WeatherSamara < ApplicationRecord
   #call the api with HTTParty and parse the JSON response
   def self.call
     response = HTTParty.get(base_uri)
-    @body = JSON.parse(response.body)
-  end
-
-  def self.historical
+    body = JSON.parse(response.body)
     @historical =
-      @body.map do |element|
+      body.map do |element|
         Hash[time: element["LocalObservationDateTime"],
              temp: element["Temperature"]]
       end
   end
 
+  def self.historical
+    @historical
+  end
 
+  def self.historical_max
+    @historical.map { |el| el[:temp]["Metric"]["Value"] }.max
+  end
+
+  def self.historical_min
+    @historical.map { |el| el[:temp]["Metric"]["Value"] }.min
+  end
 
 
 end
