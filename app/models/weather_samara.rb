@@ -10,4 +10,16 @@ class WeatherSamara < ApplicationRecord
     response = HTTParty.get(base_uri)
     @body = JSON.parse(response.body)
   end
+
+  def self.historical
+    @historical =
+      @body.map do |element|
+        Hash[time: element["LocalObservationDateTime"],
+             temp: element["Temperature"]]
+      end
+  end
+
+
+
+
 end

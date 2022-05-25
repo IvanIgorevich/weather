@@ -1,14 +1,12 @@
 class WeatherSamarasController < ApplicationController
-  before_action :set_weather_samara, only: [:show, :update, :destroy]
-
-  # GET /weather_samaras
+  before_action :set_weather_samara
+  # GET /weather/historical
   def index
-    @weather_samaras = WeatherSamara.call
 
-    render json: @weather_samaras
+    render json: WeatherSamara.historical
   end
 
-  # GET /weather_samaras/1
+  # GET /weather/current
   def show
     render json: @weather_samara
   end
@@ -41,7 +39,7 @@ class WeatherSamarasController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_weather_samara
-      @weather_samara = WeatherSamara.find(params[:id])
+      @weather_samara = WeatherSamara.call
     end
 
     # Only allow a list of trusted parameters through.
