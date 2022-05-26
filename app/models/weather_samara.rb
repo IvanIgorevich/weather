@@ -12,15 +12,15 @@ class WeatherSamara < ApplicationRecord
     @historical =
       body.map do |element|
         Hash[time: element["LocalObservationDateTime"],
+             timestamp: element["EpochTime"],
              temp: element["Temperature"]]
       end
   end
 
   def self.by_time(timestamp)
-
-    # @historical.each do |hash|
-    #
-    # end
+    @historical.map do |hash|
+      return hash if ((hash[:timestamp] - 3599)..hash[:timestamp]).include?(timestamp)
+    end
   end
 
   def self.historical

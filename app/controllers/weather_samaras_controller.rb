@@ -7,7 +7,11 @@ class WeatherSamarasController < ApplicationController
   end
 
   def by_time
-    render json: {time: params[:timestamp]}
+    if WeatherSamara.by_time(params[:timestamp].to_i).include?(nil)
+      render json: { :text => 'Not Found', :status => '404' }
+    else
+      render json: WeatherSamara.by_time(params[:timestamp].to_i)
+    end
   end
 
   def historical_max
