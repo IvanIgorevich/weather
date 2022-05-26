@@ -3,7 +3,7 @@ class WeatherSamarasController < ApplicationController
   # GET /weather/historical
   def index
 
-    render json: WeatherSamara.historical
+    render json: @weather_samara.historical
   end
 
   def by_time
@@ -15,20 +15,20 @@ class WeatherSamarasController < ApplicationController
   end
 
   def historical_max
-    render json: WeatherSamara.historical_max
+    render json: @weather_samara.historical_max
   end
 
   def historical_min
-    render json: WeatherSamara.historical_min
+    render json: @weather_samara.historical_min
   end
 
   # GET /weather_samaras/1
   def current
-    render json: WeatherSamara.current
+    render json: @weather_samara#.current
   end
 
   def historical_avg
-    render json: WeatherSamara.historical_avg
+    render json: @weather_samara.historical_avg
   end
 
   def health
@@ -38,7 +38,7 @@ class WeatherSamarasController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_weather_samara
-      @weather_samara = WeatherSamara.call
+      @weather_samara = WeatherSamara.new
     end
 
     # Only allow a list of trusted parameters through.
