@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   get '/weather/historical/max', to: 'weather_samaras#historical_max'
   get '/weather/historical/min', to: 'weather_samaras#historical_min'
   get '/weather/historical/avg', to: 'weather_samaras#historical_avg'
+  get '/weather/by_time(/:timestamp)', to: 'weather_samaras#by_time'
   get '/health', to: 'weather_samaras#health'
 
   resources :weather_samaras

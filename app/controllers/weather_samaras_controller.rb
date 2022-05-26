@@ -6,6 +6,10 @@ class WeatherSamarasController < ApplicationController
     render json: WeatherSamara.historical
   end
 
+  def by_time
+    render json: {time: params[:timestamp]}
+  end
+
   def historical_max
     render json: WeatherSamara.historical_max
   end

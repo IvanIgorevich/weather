@@ -16,6 +16,13 @@ class WeatherSamara < ApplicationRecord
       end
   end
 
+  def self.by_time(timestamp)
+
+    # @historical.each do |hash|
+    #
+    # end
+  end
+
   def self.historical
     @historical
   end
