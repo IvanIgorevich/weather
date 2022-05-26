@@ -3,7 +3,7 @@ class WeatherSamarasController < ApplicationController
   # GET /weather/historical
   def index
 
-    render json: WeatherSamara.historical
+    render json: @weather_samara #WeatherSamara.historical
   end
 
   def by_time
@@ -32,17 +32,22 @@ class WeatherSamarasController < ApplicationController
   end
 
   def health
-    render json: {status: 'OK'}
+    render json: { status: 'OK' }
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_weather_samara
-      @weather_samara = WeatherSamara.call
-    end
 
-    # Only allow a list of trusted parameters through.
-    def weather_samara_params
-      params.fetch(:weather_samara, {})
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_weather_samara
+    @weather_samara = WeatherSamara.create(body: parsing)
+  end
+
+  def parsing
+    WeatherSamara.call
+  end
+
+  # Only allow a list of trusted parameters through.
+  def weather_samara_params
+    params.fetch(:weather_samara, {}).permit(:body)
+  end
 end
