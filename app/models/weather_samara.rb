@@ -10,7 +10,7 @@ class WeatherSamara < ApplicationRecord
     file = File.new("#{Rails.root}/app/models/hardcode.json", "r:UTF-8")
     content = file.read
     body = JSON.parse(content)
-    @historical =
+    #@historical =
       body.map do |element|
         Hash[time: element["LocalObservationDateTime"],
              timestamp: element["EpochTime"],
@@ -34,12 +34,12 @@ class WeatherSamara < ApplicationRecord
     end
   end
 
-  def self.historical
-    @historical
-  end
+  # def self.historical
+  #   @historical
+  # end
 
   def self.historical_max
-    @historical.map { |el| el[:temp]["Metric"]["Value"] }.max
+    @weather_samara.body.map { |el| el[:temp]["Metric"]["Value"] }.max
   end
 
   def self.historical_min

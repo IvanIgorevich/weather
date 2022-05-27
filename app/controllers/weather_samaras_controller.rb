@@ -3,7 +3,7 @@ class WeatherSamarasController < ApplicationController
   # GET /weather/historical
   def index
 
-    render json: WeatherSamara.historical #@weather_samara
+    render json: @weather_samara.body #WeatherSamara.historical
   end
 
   def by_time
@@ -15,7 +15,7 @@ class WeatherSamarasController < ApplicationController
   end
 
   def historical_max
-    render json: WeatherSamara.historical_max
+    render json: @weather_samara.historical_max
   end
 
   def historical_min
@@ -39,7 +39,14 @@ class WeatherSamarasController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_weather_samara
-    @weather_samara = WeatherSamara.call #create(body: parsing)
+    if WeatherSamara.count > 0 && WeatherSamara.last.updated_at > (Time.now - 3600)
+      @weather_samara = WeatherSamara.last
+    else
+      WeatherSamara.destroy_all
+      @weather_samara = WeatherSamara.create(body: parsing)
+    end
+
+    #@weather_samara = WeatherSamara.call #create(body: parsing)
   end
 
   def parsing
