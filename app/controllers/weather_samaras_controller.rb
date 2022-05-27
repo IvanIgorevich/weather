@@ -3,7 +3,7 @@ class WeatherSamarasController < ApplicationController
   # GET /weather/historical
   def index
 
-    render json: @weather_samara #WeatherSamara.historical
+    render json: WeatherSamara.historical #@weather_samara
   end
 
   def by_time
@@ -39,7 +39,7 @@ class WeatherSamarasController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_weather_samara
-    @weather_samara = WeatherSamara.create(body: parsing)
+    @weather_samara = WeatherSamara.call #create(body: parsing)
   end
 
   def parsing
