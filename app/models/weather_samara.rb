@@ -9,10 +9,6 @@ class WeatherSamara < ApplicationRecord
 
   #call the api with HTTParty and parse the JSON response
   def self.call
-    # file = File.new("#{Rails.root}/app/models/hardcode.json", "r:UTF-8")
-    # content = file.read
-    # body = JSON.parse(content)
-
     response = HTTParty.get(base_uri)
     body = JSON.parse(response.body)
 

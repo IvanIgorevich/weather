@@ -5,42 +5,24 @@ class WeatherSamarasControllerTest < ActionDispatch::IntegrationTest
     @weather_samara = weather_samaras(:one)
   end
 
-  test 'current' do
-    get '/weather/current'
-    #assert_response :success
-
-    assert({"time":"2022-05-27T15:58:00+04:00","timestamp":1653652680,"temp":{"Metric":{"Value":18.6,"Unit":"C","UnitType":17},"Imperial":{"Value":65.0,"Unit":"F","UnitType":18}}})
+  test "current" do
+    assert_equal(@weather_samara.body[0]["time"], "2022-05-27T15:58:00+04:00")
   end
 
+  test "correctness of calculations historical_max" do
+    assert_equal(@weather_samara.historical_max(@weather_samara.body), 18.6)
+  end
 
-  # test "should get index" do
-  #   get weather_samaras_url, as: :json
-  #   assert_response :success
-  # end
-  #
-  # test "should create weather_samara" do
-  #   assert_difference('WeatherSamara.count') do
-  #     post weather_samaras_url, params: { weather_samara: {  } }, as: :json
-  #   end
-  #
-  #   assert_response 201
-  # end
-  #
-  # test "should show weather_samara" do
-  #   get weather_samara_url(@weather_samara), as: :json
-  #   assert_response :success
-  # end
-  #
-  # test "should update weather_samara" do
-  #   patch weather_samara_url(@weather_samara), params: { weather_samara: {  } }, as: :json
-  #   assert_response 200
-  # end
-  #
-  # test "should destroy weather_samara" do
-  #   assert_difference('WeatherSamara.count', -1) do
-  #     delete weather_samara_url(@weather_samara), as: :json
-  #   end
-  #
-  #   assert_response 204
-  # end
+  test "correctness of calculations historical_avg" do
+    assert_equal(@weather_samara.historical_avg(@weather_samara.body), 13.5)
+  end
+
+  test "should be WeatherSamara" do
+    assert_instance_of( WeatherSamara, @weather_samara)
+  end
+
+  test "should be 404 for wrong timestamp" do
+    get "/weather/by_time/8764"
+    assert_response :missing
+  end
 end
