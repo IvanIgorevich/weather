@@ -7,7 +7,4 @@ Rails.application.routes.draw do
   get '/weather/historical/avg', to: 'weather_samaras#historical_avg'
   get '/weather/by_time(/:timestamp)', to: 'weather_samaras#by_time'
   get '/health', to: 'weather_samaras#health'
-
-  resources :weather_samaras
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

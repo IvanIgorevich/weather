@@ -3,9 +3,10 @@ class WeatherSamarasController < ApplicationController
 
   # GET /weather/historical
   def historical
-    render json: @weather_samara
+    render json: @weather_samara.body
   end
 
+  # GET /weather/by_time(/:timestamp)
   def by_time
     if @weather_samara.by_time(@weather_samara.body, params[:timestamp].to_i).include?(nil)
       render json: { :text => 'Not Found', :status => '404' }
@@ -14,23 +15,27 @@ class WeatherSamarasController < ApplicationController
     end
   end
 
+  # GET /weather/historical/max
   def historical_max
     render json: @weather_samara.historical_max(@weather_samara.body)
   end
 
+  # GET /weather/historical/min
   def historical_min
     render json: @weather_samara.historical_min(@weather_samara.body)
   end
 
-  # GET /weather_samaras/1
+  # GET /weather/current
   def current
-    render json: @weather_samara.current(@weather_samara.body)
+    render json: @weather_samara.body[0]
   end
 
+  # GET /weather/historical/avg
   def historical_avg
     render json: @weather_samara.historical_avg(@weather_samara.body)
   end
 
+  # GET /weather/health
   def health
     render json: { status: 'OK' }
   end
