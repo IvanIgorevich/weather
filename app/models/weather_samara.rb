@@ -1,6 +1,8 @@
 class WeatherSamara < ApplicationRecord
   include HTTParty
 
+  validates :body, presence: true
+
   #Samara
   base_uri #"http://dataservice.accuweather.com/currentconditions/v1/290396/historical/24?apikey=%09q6bv0nfQ69WOVYJ6ZEyBW4sP4c4oy586"
   format :json
@@ -10,8 +12,8 @@ class WeatherSamara < ApplicationRecord
     file = File.new("#{Rails.root}/app/models/hardcode.json", "r:UTF-8")
     content = file.read
     body = JSON.parse(content)
-    #@historical =
-      body.map do |element|
+
+    body.map do |element|
         Hash[time: element["LocalObservationDateTime"],
              timestamp: element["EpochTime"],
              temp: element["Temperature"]]
@@ -28,31 +30,25 @@ class WeatherSamara < ApplicationRecord
     #   end
   end
 
-  def self.by_time(timestamp)
-    @historical.map do |hash|
-      return hash if ((hash[:timestamp] - 3599)..hash[:timestamp]).include?(timestamp)
+  def by_time(body, timestamp)
+    body.map do |hash|
+      return hash if ((hash["timestamp"] - 3599)..hash["timestamp"]).include?(timestamp)
     end
   end
 
-  # def self.historical
-  #   @historical
-  # end
-
-  def self.historical_max
-    @weather_samara.body.map { |el| el[:temp]["Metric"]["Value"] }.max
+  def historical_max(body)
+    body.map { |el| el["temp"]["Metric"]["Value"] }.max
   end
 
-  def self.historical_min
-    @historical.map { |el| el[:temp]["Metric"]["Value"] }.min
+  def historical_min(body)
+    body.map { |el| el["temp"]["Metric"]["Value"] }.min
   end
 
-  def self.current
-    @historical[0]
+  def current(body)
+    body[0]
   end
 
-  def self.historical_avg
-    (@historical.map { |el| el[:temp]["Metric"]["Value"] }.reduce(:+).to_f / @historical.size).round(1)
+  def historical_avg(body)
+    (body.map { |el| el["temp"]["Metric"]["Value"] }.reduce(:+).to_f / body.size).round(1)
   end
-
-
 end
