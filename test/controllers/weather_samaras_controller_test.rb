@@ -28,4 +28,10 @@ class WeatherSamarasControllerTest < ActionDispatch::IntegrationTest
     get "/weather/by_time/8764"
     assert_response :missing
   end
+
+  # if the passed time is within a day ago, the page should be displayed correctly
+  test 'by_time' do
+    get "http://localhost:3000/weather/by_time/1653602680"
+    assert_response :success
+  end
 end
