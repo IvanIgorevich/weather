@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  mount Rswag::Ui::Engine => '/api-docs'
+  mount Rswag::Api::Engine => '/api-docs'
   get '/weather/current', to: 'weather_samaras#current'
   get '/weather/historical', to: 'weather_samaras#historical'
   get '/weather/historical/max', to: 'weather_samaras#historical_max'
