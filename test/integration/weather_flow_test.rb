@@ -26,8 +26,9 @@ class WeatherFlowTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  # if the passed time is within a day ago, the page should be displayed correctly
   test 'by_time' do
-    get 'http://localhost:3000/weather/by_time/1653645040'
+    get "http://localhost:3000/weather/by_time/#{Time.now.to_i - 43200}"
     assert_response :success
   end
 

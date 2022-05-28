@@ -15,17 +15,19 @@ paths:
             schema:
               type: hash
               items: string, hash
+
   /weather/historical:
     get:
       description: Show weather for 24 hours
       responses:
         '200':
-          description: Gets an array of weather for 24 hours
+          description: Gets an array of hashes by weather for 24 hours
         content:
           application/json:
             schema:
               type: array
               items: hash
+
   /weather/historical/max:
     get:
       description: Show maximum temperature in 24 hours
@@ -36,6 +38,7 @@ paths:
           application/json:
             schema:
               type: integer
+
   /weather/historical/min:
     get:
       description: Show minimum temperature in 24 hours
@@ -46,6 +49,7 @@ paths:
           application/json:
             schema:
               type: integer
+
   /weather/historical/avg:
     get:
       description: Show average temperature in 24 hours
@@ -56,7 +60,8 @@ paths:
           application/json:
             schema:
               type: integer
-  /weather/by_time(/:timestamp):
+
+  /weather/by_time/{:timestamp}:
     get:
       description: Show weather closest to transmitted timestamp
       responses:
@@ -67,6 +72,7 @@ paths:
             schema:
               type: hash
               items: string, hash
+
   /health:
     get:
       description: Show backend status
@@ -79,7 +85,7 @@ paths:
               type: hash
 
 servers:
-- url: https://{defaultHost}
+- url: http://{defaultHost}
   variables:
     defaultHost:
       default: localhost:3000
