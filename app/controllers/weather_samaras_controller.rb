@@ -9,8 +9,7 @@ class WeatherSamarasController < ApplicationController
   # GET /weather/by_time(/:timestamp)
   def by_time
     if @weather_samara.by_time(@weather_samara.body, params[:timestamp].to_i).include?(nil)
-      #raise ActionController::RoutingError.new('Not Found')
-      render json: { :text => 'Not Found', :status => '404' }
+      render file: "#{Rails.root}/public/404", status: :not_found, message: 'Not found'
     else
       render json: @weather_samara.by_time(@weather_samara.body, params[:timestamp].to_i)
     end

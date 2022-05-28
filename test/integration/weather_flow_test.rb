@@ -27,7 +27,7 @@ class WeatherFlowTest < ActionDispatch::IntegrationTest
   end
 
   test 'by_time' do
-    get 'http://localhost:3000/weather/by_time/1621823790'
+    get 'http://localhost:3000/weather/by_time/1653645040'
     assert_response :success
   end
 
