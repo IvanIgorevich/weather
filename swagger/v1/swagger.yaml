@@ -1,11 +1,85 @@
 ---
 openapi: 3.0.1
 info:
-  title: API V1
-  version: v1
-paths: {}
+  title: WeatherSamara API
+  version: v2
+paths:
+  /weather/current:
+    get:
+      description: Show current weather
+      responses:
+        '200':
+          description: Gets a hash of current weather
+        content:
+          application/json:
+            schema:
+              type: hash
+              items: string, hash
+  /weather/historical:
+    get:
+      description: Show weather for 24 hours
+      responses:
+        '200':
+          description: Gets an array of weather for 24 hours
+        content:
+          application/json:
+            schema:
+              type: array
+              items: hash
+  /weather/historical/max:
+    get:
+      description: Show maximum temperature in 24 hours
+      responses:
+        '200':
+          description: Gets number of maximum temperature in 24 hours
+        content:
+          application/json:
+            schema:
+              type: integer
+  /weather/historical/min:
+    get:
+      description: Show minimum temperature in 24 hours
+      responses:
+        '200':
+          description: Gets number of minimum temperature in 24 hours
+        content:
+          application/json:
+            schema:
+              type: integer
+  /weather/historical/avg:
+    get:
+      description: Show average temperature in 24 hours
+      responses:
+        '200':
+          description: Gets number of average temperature in 24 hours
+        content:
+          application/json:
+            schema:
+              type: integer
+  /weather/by_time(/:timestamp):
+    get:
+      description: Show weather closest to transmitted timestamp
+      responses:
+        '200':
+          description: Gets a hash of weather
+        content:
+          application/json:
+            schema:
+              type: hash
+              items: string, hash
+  /health:
+    get:
+      description: Show backend status
+      responses:
+        '200':
+          description: Gets a backend status
+        content:
+          application/json:
+            schema:
+              type: hash
+
 servers:
 - url: https://{defaultHost}
   variables:
     defaultHost:
-      default: www.example.com
+      default: localhost:3000
