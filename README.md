@@ -62,3 +62,8 @@ $ rake db:migrate
 $ bin/rails test
 ~~~
 
+* To start local server
+
+~~~
+$ bin/rails s
+~~~
