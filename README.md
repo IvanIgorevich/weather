@@ -2,6 +2,8 @@
 
 API for weather statistics. Data source - [AccuWeather APIs](https://developer.accuweather.com/apis).
 
+[**DEMO**]( https://megaweather.herokuapp.com/)
+
 Default city Samara. 
 To change, you need to [find required location key](https://developer.accuweather.com/accuweather-locations-api/apis/get/locations/v1/cities/search)
 on AccuWeather APIs and paste it into the model code `app/models/weather_samara.rb`:
