@@ -39,7 +39,7 @@ class WeatherSamarasController < ApplicationController
 
   # GET /weather/health
   def health
-    render json: { status: 'OK' }
+    render json: @weather_samara.health
   end
 
   private

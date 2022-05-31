@@ -47,4 +47,15 @@ class WeatherSamara < ApplicationRecord
   def historical_avg(body)
     (body.map { |el| el["temp"]["Metric"]["Value"] }.reduce(:+).to_f / body.size).round(1)
   end
+
+  def health
+    response = HTTParty.get(BASE_URI)
+    body = JSON.parse(response.body)
+
+    if body[0].include?("Temperature")
+      { status: 'OK' }
+    else
+      { status: 'Change apikey, look README' }
+    end
+  end
 end
