@@ -4,7 +4,7 @@ API for weather statistics. Data source - [AccuWeather APIs](https://developer.a
 
 [**DEMO**]( https://megaweather.herokuapp.com/)
 
-###Endpoints:
+### Endpoints:
 
 ***/api-docs*** - Swagger documentation
 
@@ -22,7 +22,7 @@ API for weather statistics. Data source - [AccuWeather APIs](https://developer.a
 
 ***/health*** - Backend status
 
-###Change of location
+### Change of location
 
 Default city Samara. 
 To change, you need to [find required location key](https://developer.accuweather.com/accuweather-locations-api/apis/get/locations/v1/cities/search)
@@ -33,7 +33,7 @@ on AccuWeather APIs and paste it into the model code `app/models/weather_samara.
   LOCATION_KEY = ...
 ~~~
 
-###API key change
+### API key change
 
 The application uses on AccuWeather APIs the apikey of the author. But it gets old fast)
 To get the apikey, register on [AccuWeather APIs](https://developer.accuweather.com) and create new app.
@@ -43,7 +43,7 @@ Then paste apikey into the model code `app/models/weather_samara.rb`:
   API_KEY_ACCUWEATHER = "..."
 ~~~
 
-###Configuration
+### Configuration
 
 * ruby 3.0.3p157
 
