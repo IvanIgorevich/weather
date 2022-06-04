@@ -49,6 +49,12 @@ Then paste apikey into the model code `app/models/weather_samara.rb`:
 
 * Rails 6.1.6
 
+* To install gems
+
+~~~
+$ bundle install
+~~~
+
 * Database creation 
 
 ~~~
