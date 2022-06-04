@@ -1,8 +1,8 @@
 require "test_helper"
 
-class WeatherSamarasControllerTest < ActionDispatch::IntegrationTest
+class TemperaturesControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @temperature = weather_samaras(:one)
+    @temperature = temperatures(:one)
   end
 
   test "current" do
