@@ -15,15 +15,12 @@ class Temperature < ApplicationRecord
 
   def self.call
     # call the api with HTTParty and parse the JSON response
-    response = HTTParty.get(BASE_URI)
-    body = JSON.parse(response.body)
-
     # leave only time and temperature
-    body.map do |element|
-        Hash[time: element["LocalObservationDateTime"],
-             timestamp: element["EpochTime"],
-             temp: element["Temperature"]]
-      end
+    JSON.parse(HTTParty.get(BASE_URI).body).map do |element|
+      Hash[time: element["LocalObservationDateTime"],
+           timestamp: element["EpochTime"],
+           temp: element["Temperature"]]
+    end
   end
 
   # returns the temperature if specified  timestamp is between the hash timestamp and minus the hour
@@ -48,11 +45,10 @@ class Temperature < ApplicationRecord
     (body.map { |el| el["temp"]["Metric"]["Value"] }.reduce(:+).to_f / body.size).round(1)
   end
 
+  # backend status
   def health
-    response = HTTParty.get(BASE_URI)
-    body = JSON.parse(response.body)
-
-    if body[0].include?("Temperature")
+    # if calling the api are success - 'OK'
+    if JSON.parse(HTTParty.get(BASE_URI).body)[0].include?("Temperature")
       { status: 'OK' }
     else
       { status: 'Change apikey, look README' }
