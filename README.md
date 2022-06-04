@@ -37,7 +37,7 @@ on AccuWeather APIs and paste it into the model code `app/models/weather_samara.
 
 The application uses on AccuWeather APIs the apikey of the author. But it gets old fast)
 To get the apikey, register on [AccuWeather APIs](https://developer.accuweather.com) and create new app.
-Then paste apikey into the model code `app/models/weather_samara.rb`:
+Then paste apikey into the model code `app/models/temperature.rb`:
 
 ~~~
   API_KEY_ACCUWEATHER = "..."

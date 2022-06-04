@@ -1,4 +1,4 @@
-class WeatherSamara < ApplicationRecord
+class Temperature < ApplicationRecord
   include HTTParty
 
   API_KEY_ACCUWEATHER = "2XvxImTBWyeWhBW9UvikFPQ40TfQ3I9m"
